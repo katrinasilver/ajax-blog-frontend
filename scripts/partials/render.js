@@ -1,3 +1,7 @@
 const templates = require('./templates')
 
-module.exports = {}
+const form = (container) => container.innerHTML = templates.form()
+
+module.exports = {
+  form
+}
