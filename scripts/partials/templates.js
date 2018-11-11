@@ -21,17 +21,29 @@ const form = () => {
         </label>
 
         <div class="control">
-          <button class="save button is-link">Save</button>
+          <input type="submit" class="save button is-link" value="Add Post">
         </div>
         <hr>
-        <div class="save notification is-hidden"><!-- append message here -->Success</div>
-
       </div>
 
     </form>
   `
 }
 
+const post = (title, author, date, content, tags) => {
+  return `
+      <article class="post ${title}">
+      <h2 class="title">${ title}</h2>
+      <div class="author">${ author }</div>
+      <div class="date">${ date }</div>
+      <div class="content">
+        <p>${ content }</p>
+      </div>
+      <span class="tag is-primary">${ tags }</span>
+    </article>
+  `
+}
+
 module.exports = {
-  form
+  form, post
 }

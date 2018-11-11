@@ -6747,3 +6747,13 @@ label.panel-block {
   padding: 3rem 1.5rem 6rem; }
 
 /** Custom Styles **/
+main.contents {
+  position: relative; }
+  main.contents .notification {
+    transition: .3s ease-in; }
+  main.contents .hide {
+    opacity: 0;
+    position: absolute;
+    transition: .3s ease-in;
+    visibility: hidden;
+    width: 100%; }
