@@ -1,11 +1,7 @@
 const axios = require('axios')
-// const shortid = require('shortid')
 const url = 'https://blog-posting-api.herokuapp.com/posts'
 
-const create = (title, content) => {
-  let post = { id, title, content }
-  return axios.post(url, post)
-}
+const create = (content) => axios.post(url, content)
 
 const get = () => axios.get(url)
 

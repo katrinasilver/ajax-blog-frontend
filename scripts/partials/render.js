@@ -1,15 +1,11 @@
 const templates = require('./templates')
-// const { get, remove, update } = require('./posts')
+const posts = require('./posts')
 
 const form = (container) => container.innerHTML = templates.form()
 
 const renderPost = (container, data) => {
-  const layout = data.map(post => templates.newPost(post)).join('\n')
-
-  console.log(data.posts.id)
-
   container.innerHTML = ''
-  container.innerHTML = layout
+  container.innerHTML = data.map(a => templates.newPost(a.id, a.date, a.author, a.title, a.content)).reverse().join('\n')
 }
 
 module.exports = {
