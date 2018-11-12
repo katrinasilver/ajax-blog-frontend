@@ -1,9 +1,10 @@
 const axios = require('axios')
 const url = 'https://blog-posting-api.herokuapp.com/posts'
-// const templates = require('./partials/templates')
+const templates = require('./partials/templates')
 // MOVE THE ABOVE TO RENDER.JS LATER!!!
 
 const render = require('./partials/render')
+
 // const { get, remove, update } = require('./partials/posts')
 
 const showForm = document.querySelector('#create')
@@ -45,18 +46,20 @@ form.addEventListener('submit', (e) => {
     return today
   }
 
-  let article = {
-    "date": postDate(),
-    "title": e.target.title.value,
-    "content" : e.target.article.value
+  let articles = {
+    id: '',
+    date: postDate(),
+    title: e.target.title.value,
+    content: e.target.article.value
   }
 
-  axios.post(url, article).then(response => { render() })
+  axios.post(url, articles).then(response =>  render() )
 
   const render = () => {
     axios.get(url)
       .then(response => {
-        render.renderPost(postContainer, response.data.posts)
+        postContainer.innerHTML = ''
+        postContainer.innerHTML = response.data.map(a => templates.newPost(a.id, a.date, a.title, a.content)).join('\n')
     })
   }
 })

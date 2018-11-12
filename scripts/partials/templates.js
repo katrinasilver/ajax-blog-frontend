@@ -30,11 +30,11 @@ const form = () => {
   `
 }
 
-const newPost = (title, date, content) => {
+const newPost = (id, date, title, content) => {
   return `
-    <article class="post">
+    <article class="post ${id}">
       <h2 class="title">${ title }</h2>
-      <div class="date">created: ${ date }</div>
+      <div class="date">date: ${ date }</div>
       <div class="author">written by: katweena</div>
       <div class="content(">
       <p>${ content }</p>
