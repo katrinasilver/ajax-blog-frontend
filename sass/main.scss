@@ -2,6 +2,14 @@
 @import "../node_modules/bulma/bulma.sass";
 
 /** Custom Styles **/
+body {
+
+  > .container {
+    min-height: 100vh
+  }
+
+}
+
 main.contents {
   position: relative;
 
@@ -15,5 +23,23 @@ main.contents {
     transition: .3s ease-in;
     visibility: hidden;
     width: 100%;
+  }
+}
+
+article.post {
+
+  h2 {
+    color: $danger;
+    font-weight: 300;
+  }
+
+  .author,
+  .date {
+    color: $grey;
+    font-size: .9rem;
+  }
+
+  .content p {
+    margin-top: 2rem;
   }
 }

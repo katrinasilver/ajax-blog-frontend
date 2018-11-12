@@ -49,6 +49,7 @@ form.addEventListener('submit', (e) => {
   let articles = {
     id: '',
     date: postDate(),
+    author: e.target.author.value,
     title: e.target.title.value,
     content: e.target.article.value
   }
@@ -59,7 +60,7 @@ form.addEventListener('submit', (e) => {
     axios.get(url)
       .then(response => {
         postContainer.innerHTML = ''
-        postContainer.innerHTML = response.data.map(a => templates.newPost(a.id, a.date, a.title, a.content)).join('\n')
+        postContainer.innerHTML = response.data.map(a => templates.newPost(a.id, a.date, a.author, a.title, a.content)).join('\n')
     })
   }
 })

@@ -6747,6 +6747,9 @@ label.panel-block {
   padding: 3rem 1.5rem 6rem; }
 
 /** Custom Styles **/
+body > .container {
+  min-height: 100vh; }
+
 main.contents {
   position: relative; }
   main.contents .notification {
@@ -6757,3 +6760,15 @@ main.contents {
     transition: .3s ease-in;
     visibility: hidden;
     width: 100%; }
+
+article.post h2 {
+  color: #ff3860;
+  font-weight: 300; }
+
+article.post .author,
+article.post .date {
+  color: #7a7a7a;
+  font-size: .9rem; }
+
+article.post .content p {
+  margin-top: 2rem; }
