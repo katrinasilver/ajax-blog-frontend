@@ -1,10 +1,16 @@
-const render = require('./partials/render')
+const axios = require('axios')
+const url = 'https://blog-posting-api.herokuapp.com/posts'
+// const templates = require('./partials/templates')
+// MOVE THE ABOVE TO RENDER.JS LATER!!!
 
-const post = document.querySelector('#posts')
-render.post(post)
+const render = require('./partials/render')
+// const { get, remove, update } = require('./partials/posts')
 
 const showForm = document.querySelector('#create')
 render.form(showForm)
+
+const postContainer = document.querySelector('#posts')
+// render.renderPosts(postContainer, response.data.posts)
 
 const button = document.querySelector('button.is-link')
 const form = document.querySelector('#form')
@@ -19,12 +25,43 @@ form.addEventListener('submit', (e) => {
   e.preventDefault()
 
   form.classList.add('is-hidden')
-  render.post(notification)
 
-  notification.innerHTML = 'New Post! Created'
+  notification.innerHTML = 'New article posted! Hooray!'
   notification.classList.remove('hide')
-
   setTimeout(() => { notification.classList.add('hide') }, 1500)
 
-  render.post(post)
+  // MOVE THIS LATER!
+  const postDate = () => {
+    let today = new Date()
+    let dd = today.getDate()
+    let mm = today.getMonth() + 1
+    let yyyy = today.getFullYear()
+
+    if (dd < 10) { dd = `0${dd}` }
+    if (mm < 10) { mm = `0${mm}` }
+
+    today = `${mm}-${dd}-${yyyy}`
+
+    return today
+  }
+
+  let article = {
+    "date": postDate(),
+    "title": e.target.title.value,
+    "content" : e.target.article.value
+  }
+
+  axios.post(url, article).then(response => { render() })
+
+  const render = () => {
+    axios.get(url)
+      .then(response => {
+        render.renderPost(postContainer, response.data.posts)
+    })
+  }
 })
+
+// get()
+// .then((response) => {
+//   render.renderPosts(postContainer, response.data.data)
+// })
