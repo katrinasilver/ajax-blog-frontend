@@ -1,29 +1,23 @@
-const templates = require('./templates')
-const { eventListener } = require('./utils')
+const { form, newPost, editPost, recentPost } = require('./templates')
+const { notify, eventListener } = require('./utils')
 const { set, get, reset } = require('./edit')
-const { read, remove, update } = require('./posts')
+const { read, readOne, showRecent, remove, update } = require('./posts')
 
-const form = (container) => container.innerHTML = templates.form()
-
-const notify = (container, message, time) => {
-  const notice = document.querySelector(container)
-  notice.innerHTML = message
-  notice.classList.remove('hide')
-  setTimeout(() => { notice.classList.add('hide') }, time)
-}
+const addForm = (container) => container.innerHTML = form()
 
 const renderPost = (posts) => {
   const postContainer = document.querySelector('#posts')
-  let layout = posts.map(post => post.id === get() ? templates.editPost(post) : templates.newPost(post))
+  let layout = posts.map(post => post.id === get() ? editPost(post) : newPost(post))
 
   postContainer.innerHTML = ''
   postContainer.innerHTML = layout.reverse().join('\n')
+
 
   eventListener('.delete-post', 'click', (e) => {
     e.preventDefault()
     let id = e.target.parentElement.getAttribute('data-id')
     remove(id)
-      .catch(error => notify('#notice', 'Post cannot be deleted!', 2000))
+    .catch(error => notify('#notice', 'Post cannot be deleted!', 2000))
     .finally(() => {
       read().then(response => renderPost(response.data))
     })
@@ -59,8 +53,15 @@ const renderPost = (posts) => {
 
 }
 
-module.exports = {
-  form,
-  notify,
-  renderPost
+const recent = (posts) => {
+  const postList = document.querySelector('.menu-list')
+  postList.innerHTML = posts.map(post => recentPost(post)).reverse().join('\n')
+
+  eventListener('.post-link a', 'click', (e) => {
+    let id = e.target.parentElement.getAttribute('data-pid')
+    showRecent()
+    readOne(id).then(response => recentPost(response.data))
+  })
 }
+
+module.exports = { addForm, notify, renderPost, recent }

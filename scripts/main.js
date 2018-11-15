@@ -1,7 +1,7 @@
-const render = require('./partials/render')
-const { create, read } = require('./partials/posts')
+const { addForm, renderPost, recent, notify } = require('./partials/render')
+const { create, read, readOne, showRecent } = require('./partials/posts')
 
-render.form(document.querySelector('#create'))
+addForm(document.querySelector('#create'))
 
 document.querySelector('button.is-link').addEventListener('click', (e) => {
   e.preventDefault()
@@ -14,8 +14,7 @@ document.querySelector('.cancel-post').addEventListener('click', (e) => {
 })
 
 document.querySelector('#form').addEventListener('submit', (e) => {
-  // e.preventDefault()
-
+  e.preventDefault()
   form.classList.add('is-hidden')
 
   const article = {
@@ -28,13 +27,14 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   create(article)
   .then(read)
   .then(response => {
-    render.renderPost(response.data)
-    render.notify('#notice', 'New article posted! Hooray!', 1500)
+    renderPost(response.data)
+    notify('#notice', 'New article posted! Hooray!', 1500)
   })
-  .catch(error => render.notify('#notice', 'All Fields are Required', 2000))
+  .catch(error => notify('#notice', 'All Fields are Required', 2000))
 
   form.reset()
 })
 
-read()
-  .then(response => render.renderPost(response.data))
+read().then(response => renderPost(response.data))
+// readOne(id?).then(response => renderPost(response.data))
+showRecent().then(response => recent(response.data))

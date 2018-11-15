@@ -61,8 +61,7 @@ const editPost = ({ id, author, title, content }) => {
   `
 }
 
-module.exports = {
-  form,
-  newPost,
-  editPost
-}
+const recentPost = ({ id, title, url }) =>
+ ` <li class="post-link" data-pid="${ id }"><a class="link" href="/posts/${ id }">${ title }</a></li>`
+
+module.exports = { form, newPost, editPost, recentPost }
