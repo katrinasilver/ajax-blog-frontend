@@ -6761,14 +6761,19 @@ main.contents {
     visibility: hidden;
     width: 100%; }
 
+article.post a {
+  font-size: .9rem;
+  display: inline-flex;
+  margin-right: 1rem; }
+
 article.post h2 {
-  color: #ff3860;
   font-weight: 300; }
 
 article.post .author,
 article.post .date {
-  color: #7a7a7a;
   font-size: .9rem; }
 
 article.post .content p {
+  font-size: 1.2rem;
+  font-weight: 300;
   margin-top: 2rem; }

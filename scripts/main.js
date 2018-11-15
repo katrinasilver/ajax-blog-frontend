@@ -1,30 +1,24 @@
 const render = require('./partials/render')
-const { create, get, remove, update } = require('./partials/posts')
+const { create, read } = require('./partials/posts')
 
-const showForm = document.querySelector('#create')
-render.form(showForm)
+render.form(document.querySelector('#create'))
 
-const postContainer = document.querySelector('#posts')
-const button = document.querySelector('button.is-link')
-const notification = document.querySelector('#notification')
-const form = document.querySelector('#form')
-
-
-button.addEventListener('click', (e) => {
+document.querySelector('button.is-link').addEventListener('click', (e) => {
   e.preventDefault()
   form.classList.remove('is-hidden')
 })
 
-form.addEventListener('submit', (e) => {
+document.querySelector('.cancel-post').addEventListener('click', (e) => {
   e.preventDefault()
+  form.classList.add('is-hidden')
+})
+
+document.querySelector('#form').addEventListener('submit', (e) => {
+  // e.preventDefault()
 
   form.classList.add('is-hidden')
 
-  notification.innerHTML = 'New article posted! Hooray!'
-  notification.classList.remove('hide')
-  setTimeout(() => { notification.classList.add('hide') }, 1500)
-
-  let article = {
+  const article = {
     id: '', date: '',
     author: e.target.author.value,
     title: e.target.title.value,
@@ -32,14 +26,15 @@ form.addEventListener('submit', (e) => {
   }
 
   create(article)
-    .then(response => get())
-    .then(response => {
-      render.renderPost(postContainer, response.data)
-    })
+  .then(read)
+  .then(response => {
+    render.renderPost(response.data)
+    render.notify('#notice', 'New article posted! Hooray!', 1500)
+  })
+  .catch(error => render.notify('#notice', 'All Fields are Required', 2000))
 
+  form.reset()
 })
 
-get()
-  .then(response => {
-    render.renderPost(postContainer, response.data)
-  })
+read()
+  .then(response => render.renderPost(response.data))

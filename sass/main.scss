@@ -7,7 +7,6 @@ body {
   > .container {
     min-height: 100vh
   }
-
 }
 
 main.contents {
@@ -28,18 +27,24 @@ main.contents {
 
 article.post {
 
+  a {
+    font-size: .9rem;
+    display: inline-flex;
+    margin-right: 1rem;
+  }
+
   h2 {
-    color: $danger;
     font-weight: 300;
   }
 
   .author,
   .date {
-    color: $grey;
     font-size: .9rem;
   }
 
   .content p {
+    font-size: 1.2rem;
+    font-weight: 300;
     margin-top: 2rem;
   }
 }
