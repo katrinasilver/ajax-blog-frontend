@@ -1,5 +1,5 @@
-const { addForm, renderPost, recent, notify } = require('./partials/render')
-const { create, read, readOne, showRecent } = require('./partials/posts')
+const { addForm, renderPost, notify } = require('./partials/render')
+const { create, read } = require('./partials/posts')
 
 addForm(document.querySelector('#create'))
 
@@ -36,5 +36,3 @@ document.querySelector('#form').addEventListener('submit', (e) => {
 })
 
 read().then(response => renderPost(response.data))
-// readOne(id?).then(response => renderPost(response.data))
-showRecent().then(response => recent(response.data))

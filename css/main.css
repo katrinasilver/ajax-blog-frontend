@@ -6761,6 +6761,13 @@ main.contents {
     visibility: hidden;
     width: 100%; }
 
+aside {
+  border-right: 3px solid whitesmoke;
+  margin-right: 1rem; }
+  aside .view-all {
+    margin-top: 1rem;
+    width: 95%; }
+
 article.post a {
   font-size: .9rem;
   display: inline-flex;
