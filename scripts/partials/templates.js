@@ -21,7 +21,7 @@ const form = () => {
   `
 }
 
-const newPost = ({id, date, author, title, content}) => {
+const newPost = ({ id, date, author, title, content }) => {
   return `
     <article class="post" data-id="${ id }">
       <h2 class="title has-text-danger">${ title }</h2>
@@ -47,7 +47,7 @@ const editPost = ({ id, author, title, content }) => {
             <input id="post-author" class="input post-author" type="text" name="author" value="${ author }" required>
           </label>
           <label for="article" class="label is-1"> Content:
-            <textarea name="article" id="article" class="textarea post-body" value="${ content }" required></textarea>
+            <textarea name="article" id="article" class="textarea post-body" required>${ content }</textarea>
           </label>
           <div class="control">
             <input type="submit" class="edit button is-link" value="Update Post">
@@ -56,7 +56,6 @@ const editPost = ({ id, author, title, content }) => {
           <hr>
         </div>
       </form>
-      <hr>
     </article>
   `
 }

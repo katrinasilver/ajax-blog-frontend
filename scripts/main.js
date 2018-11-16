@@ -1,38 +1,40 @@
-const { addForm, renderPost, notify } = require('./partials/render')
+const { addForm, renderPost } = require('./partials/render')
 const { create, read } = require('./partials/posts')
+const { notify, eventListener } = require('./partials/utils')
 
 addForm(document.querySelector('#create'))
 
-document.querySelector('button.is-link').addEventListener('click', (e) => {
+eventListener('button.is-link', 'click', (e) => {
   e.preventDefault()
-  form.classList.remove('is-hidden')
+  document.querySelector('#form').classList.remove('is-hidden')
 })
 
-document.querySelector('.cancel-post').addEventListener('click', (e) => {
+eventListener('.cancel-post', 'click', (e) => {
   e.preventDefault()
-  form.classList.add('is-hidden')
+  document.querySelector('#form').classList.add('is-hidden')
 })
 
-document.querySelector('#form').addEventListener('submit', (e) => {
+eventListener('#form', 'submit', (e) => {
   e.preventDefault()
-  form.classList.add('is-hidden')
+  e.target.classList.add('is-hidden')
 
   const article = {
-    id: '', date: '',
+    id: '',
+    date: '',
     author: e.target.author.value,
     title: e.target.title.value,
     content: e.target.article.value
   }
 
   create(article)
-  .then(read)
-  .then(response => {
-    renderPost(response.data)
-    notify('#notice', 'New article posted! Hooray!', 1500)
-  })
-  .catch(error => notify('#notice', 'All Fields are Required', 2000))
+    .then(read)
+    .then(response => {
+      renderPost(response.data)
+      notify('#notice', 'New article posted! Hooray!', 1500)
+    })
+    .catch(error => notify('#notice', 'All Fields are Required', 2000))
 
-  form.reset()
+  e.target.reset()
 })
 
 read().then(response => renderPost(response.data))

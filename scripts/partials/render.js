@@ -35,6 +35,7 @@ const renderPost = (posts) => {
   })
 
   eventListener('.cancel', 'click', (e) => {
+    e.preventDefault()
     reset()
     read().then(response => renderPost(response.data))
   })
@@ -66,9 +67,7 @@ const renderPost = (posts) => {
         button.textContent = 'View all posts'
         postList.appendChild(button)
 
-        eventListener('.view-all', 'click', () => {
-          window.location.reload(true)
-        })
+        eventListener('.view-all', 'click', () => window.location.reload(true))
       })
       .catch(error => notify('#notice', 'Post not found', 2000))
   })
