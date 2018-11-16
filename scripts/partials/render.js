@@ -53,7 +53,7 @@ const renderPost = (posts) => {
         return read()
       })
       .then(response => renderPost(response.data))
-      .catch(error => notify('#notice', 'You can\'t do that -_-', 2000))
+      .catch(error => notify('#notice', 'author max length is 30 characters', 2000))
   })
 
   eventListener('.post-link .link', 'click', (e) => {
