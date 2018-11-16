@@ -6760,17 +6760,23 @@ main.contents {
     transition: .3s ease-in;
     visibility: hidden;
     width: 100%; }
+  main.contents form label {
+    color: #ff3860;
+    font-weight: 300; }
 
 aside {
-  border-right: 3px solid whitesmoke;
   margin-right: 1rem; }
+  aside .post-link {
+    border-left: 3px solid #ffd1da; }
+    aside .post-link a {
+      border-radius: 0; }
   aside .view-all {
     margin-top: 1rem;
     width: 95%; }
 
 article.post a {
-  font-size: .9rem;
   display: inline-flex;
+  font-size: .9rem;
   margin-right: 1rem; }
 
 article.post h2 {

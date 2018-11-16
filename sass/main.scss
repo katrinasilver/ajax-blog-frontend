@@ -23,11 +23,24 @@ main.contents {
     visibility: hidden;
     width: 100%;
   }
+
+  form label {
+    color: $danger;
+    font-weight: 300;
+  }
 }
 
 aside {
-  border-right: 3px solid $white-ter;
+  // border-right: 3px solid $white-ter;
   margin-right: 1rem;
+
+  .post-link {
+    border-left: 3px solid lighten($danger, 30);
+
+    a {
+      border-radius: 0;
+    }
+  }
 
   .view-all {
     margin-top: 1rem;
