@@ -43,9 +43,9 @@ const renderPost = (posts) => {
   eventListener('article > form', 'submit', (e) => {
     e.preventDefault()
     const id = e.target.parentElement.getAttribute('data-id')
-    const author  = e.target.author.value
-    const title  = e.target.title.value
-    const content  = e.target.article.value
+    const author = e.target.author.value
+    const title = e.target.title.value
+    const content = e.target.article.value
 
     update(id, author, title, content)
       .then((response) => {
@@ -53,7 +53,7 @@ const renderPost = (posts) => {
         return read()
       })
       .then(response => renderPost(response.data))
-      .catch(error => notify('#notice', 'author max length is 30 characters', 2000))
+      .catch(error => notify('#notice', 'exceeded character limit', 2000))
   })
 
   eventListener('.post-link .link', 'click', (e) => {
@@ -73,4 +73,4 @@ const renderPost = (posts) => {
   })
 }
 
-module.exports = { addForm, notify, renderPost }
+module.exports = { addForm, renderPost }
